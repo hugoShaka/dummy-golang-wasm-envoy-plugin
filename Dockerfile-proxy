@@ -1,0 +1,5 @@
+FROM envoyproxy/envoy-dev:latest
+COPY ./envoy.yaml /etc/envoy.yaml
+COPY ./lib/test_plugin.wasm /lib/test_plugin.wasm
+RUN chmod go+r /etc/envoy.yaml /lib/test_plugin.wasm
+CMD ["/usr/local/bin/envoy", "-c", "/etc/envoy.yaml", "--service-cluster", "proxy"]
